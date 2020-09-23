@@ -1,0 +1,82 @@
+Coding Corner:
+
+Its about time for another VB tutorial! This month we're going to resume where we left off.
+Together, we are going to kill duplicate items in a combo(or list) box. So open up VB,
+insert a blank form... Lets begin!
+
+First we need to place a ComboBox (if you prefer a ListBox that is fine as well) onto
+our form. We will use the default name for the form but change the name for the ComboBox.
+Rename your ComboBox to "CBDupes" please do the same if your using a ListBox. Now place a
+CommandButton and name it "BtnDupes" The caption of your BtnDupes CommandButton should be
+"&Kill Dupes"
+
+ ___________________________________
+| Control     Name      Caption     |
+------------------------------------
+| Combo1      CBDupes   n/a         |
+| Command1    BtnDupes  &Kill Dupes |
+------------------------------------
+
+Now that we've created our ComboBox Control we need to insert duplicate names to get rid of.
+Double click on your form to display the Code Screen. You should now be in the procedure
+"Form_Load()" Within this procedure is where we are going to add our names.
+
+Private Sub Form_Load()
+' for your code you may add more duplicate names
+With BtnDupes
+     .AddItem "Scam"
+     .AddItem "scam"
+     .AddItem "Cheese"
+     .AddItem "cheese"
+     .AddItem "Weez"
+     .AddItem "weez"
+End With
+End Sub
+
+_________________________________________________________________
+Note:   As you can clearly see, the Additem function is called to 
+add a string to a ComboBox. 
+-----------------------------------------------------------------
+
+Now that we have added the names to our ComboBox we can work on the code to kill them!
+Double click on the CommandButton to display the Code Screen. You should see 
+"BtnDupes_Click()"
+
+Private Sub BtnDupes_Click()
+For i = 0 To BtnDupes.ListCount - 1 ' our first loop, this is the name we start with
+    For x = 0 To BtnDupes.ListCount - 1 ' our second loop, this is the comparison name
+    If i = x Then GoTo Nextx ' if i is equal to x then we goto the next x, otherwise 
+			     ' you will remove the wrong data
+        If LCase(BtnDupes.List(x)) = LCase(BtnDupes.List(i)) Then ' aha! if the items are equal
+				 			      ' then we remove it!
+        BtnDupes.RemoveItem x
+    End If
+Nextx:
+    Next x
+Next i
+End Sub
+
+__________________________________________________________________
+Note:   ListCount gets the number of items on a list and the List 
+        function tells which item on the list to display.
+------------------------------------------------------------------
+__________________________________________________________________
+Remember: A ComboBox's index ALWAYS starts with 0.
+------------------------------------------------------------------
+
+When you run the project you can click the CommandButton to clear the duplicate items.
+There is no freeze in this code and it runs very smoothly.
+
+I hope you find this code helpful in your up and comming projects!
+
+Excercises:
+EX_2.1: Modify this code to use a ListBox.
+EX_2.2: Use two ComboBoxes and remove all dupes on both.
+EX_2.3: Use a DO - Loop code to get the same results as a For - Next loop.
+
+Having a hard time understanding this code? Please send mail to
+nod_programer@hotmail.com c/o Scam, or visit the Source section of the NPI
+Homepage and download the Removing Dupes source code!
+
+
+
